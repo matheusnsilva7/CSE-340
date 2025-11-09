@@ -1,13 +1,8 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
+const utilities = require("../utilities");
+const baseController = require("../controllers/baseController");
 
-router.get("/cause-error", (req, res, next) => {
-  try {
-    throw new Error("Intentional 500 error triggered for testing")
-  } catch (err) {
-    err.status = 500
-    next(err)
-  }
-})
+router.get("/cause-error", utilities.handleErrors(baseController.throwError));
 
-module.exports = router
+module.exports = router;
