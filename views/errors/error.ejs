@@ -1,5 +1,5 @@
 <% if (title) { %>
-<h1><%= title %></h1>
+<h1 id="errorTitle"><%= title %></h1>
+<h3 id="errorMessage" ><%- message %></h3>
 <% } else { res.redirect('/') } %>
 
-<p>404 - File Not Found</p>

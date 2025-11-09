@@ -199,6 +199,17 @@ footer {
   font-size: 1.4rem;
 }
 
+#errorTitle {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#errorMessage {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
 /******* Media Query (Large Screens) ***************/
 @media screen and (min-width: 768px) {
   body {

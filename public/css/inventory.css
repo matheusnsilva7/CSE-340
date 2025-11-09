@@ -1,0 +1,77 @@
+/* Grid container */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 1.5rem;
+  margin: 0;
+}
+
+/* Each vehicle card */
+#inv-display li {
+  background: #fff;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover animation */
+#inv-display li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Vehicle image */
+#inv-display img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Name and price section */
+.namePrice {
+  padding: 1rem;
+  text-align: center;
+}
+
+
+/* Vehicle name (make + model) */
+.namePrice h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.namePrice a {
+  text-decoration: none;
+  color: #003366;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.namePrice a:hover {
+  color: #006699;
+}
+
+/* Price text */
+.namePrice span {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Notice message (no vehicles found) */
+.notice {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  padding: 2rem;
+}
+#wrapper main {
+  display: block;
+}

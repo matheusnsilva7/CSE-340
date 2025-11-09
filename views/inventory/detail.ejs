@@ -1,0 +1,16 @@
+<div class="detail-container" role="main">
+  <div class="vehicle-image" aria-label="Vehicle image">
+    <% if (vehicle.inv_image) { %>
+    <img
+      src="<%= vehicle.inv_image %>"
+      alt="<%= `${vehicle.inv_year || ''} ${vehicle.inv_make || ''} ${vehicle.inv_model || ''}` %>"
+    />
+    <% } else { %>
+    <img src="/images/no-photo-available.png" alt="No photo available" />
+    <% } %>
+  </div>
+
+  <div class="vehicle-content">
+    <%- vehicleHTML %>
+  </div>
+</div>
