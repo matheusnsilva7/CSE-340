@@ -16,17 +16,4 @@ function validateForm(e) {
   }
 }
 
-// simple client-side validation (more thorough can be added)
-function validate(e) {
-  const price = document.getElementById("invPrice").value;
-  if (Number(price) <= 0 || isNaN(Number(price))) {
-    e.preventDefault();
-    document.getElementById("clientError").textContent =
-      "Price must be positive number.";
-  }
-}
-
-document
-  .getElementById("classificationForm")
-  ?.addEventListener("submit", validateForm);
 document.getElementById("inventoryForm")?.addEventListener("submit", validate);
