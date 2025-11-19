@@ -57,15 +57,11 @@ form#classificationForm input:focus {
 form#classificationForm button {
   margin-top: 25px;
   padding: 12px;
-  background: #007bff;
+  background: #222131;
   color: #fff;
   border: none;
   font-size: 17px;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s ease;
-}
-
-form#classificationForm button:hover {
-  background: #007bff;
 }
