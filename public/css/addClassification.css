@@ -1,0 +1,71 @@
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Error Messages */
+.errors {
+  background: #ffe6e6;
+  border: 1px solid #ff8a8a;
+  color: #b30000;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  list-style: none;
+}
+
+.errors li {
+  margin: 4px 0;
+}
+
+/* Form Container */
+form#classificationForm {
+  width: 100%;
+  max-width: 500px;
+  padding: 25px 30px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+form#classificationForm label {
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: medium;
+}
+
+/* Inputs */
+form#classificationForm input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Focus */
+form#classificationForm input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+/* Submit Button */
+form#classificationForm button {
+  margin-top: 25px;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  font-size: 17px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form#classificationForm button:hover {
+  background: #007bff;
+}

@@ -210,6 +210,12 @@ footer {
   margin-bottom: 2rem;
 }
 
+.notice li{
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: rgb(41, 41, 41);
+}
+
 /******* Media Query (Large Screens) ***************/
 @media screen and (min-width: 768px) {
   body {

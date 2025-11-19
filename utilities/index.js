@@ -8,7 +8,7 @@ Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
   let list = "<ul>";
   list += '<li><a href="/" title="Home page">Home</a></li>';
-  data.rows.forEach((row) => {
+  data.forEach((row) => {
     list += "<li>";
     list +=
       '<a href="/inv/type/' +
@@ -124,6 +124,21 @@ Util.buildVehicleDetailHTML = function (vehicle = {}) {
     </section>
   `;
 };
+
+Util.buildClassificationList = async function (classification_id = null) {
+  const data = await invModel.getClassifications()
+  let classificationList = '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.forEach((row) => {
+    classificationList += `<option value="${row.classification_id}"`
+    if (classification_id != null && row.classification_id == classification_id) {
+      classificationList += ' selected'
+    }
+    classificationList += `>${row.classification_name}</option>`
+  })
+  classificationList += '</select>'
+  return classificationList
+}
 
 /* ****************************************
  * Middleware For Handling Errors

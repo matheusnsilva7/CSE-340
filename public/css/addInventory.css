@@ -1,0 +1,75 @@
+h1 {
+  text-align: center;
+}
+.errors {
+  background: #ffe6e6;
+  border: 1px solid #ff8a8a;
+  color: #b30000;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  list-style: none;
+  font-size: 1.4rem;
+}
+
+.errors li {
+  margin: 4px 0;
+}
+
+/* Form Container */
+form#inventoryForm {
+  width: 100%;
+  max-width: 600px;
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+/* Labels */
+form#inventoryForm label {
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: medium;
+}
+
+/* Inputs, Selects, Textareas */
+form#inventoryForm input,
+form#inventoryForm select,
+form#inventoryForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+form#inventoryForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Form focus effects */
+form#inventoryForm input:focus,
+form#inventoryForm select:focus,
+form#inventoryForm textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+/* Submit Button */
+form#inventoryForm button {
+  margin-top: 25px;
+  padding: 12px;
+  background: #01b0d3;
+  color: #fff;
+  border: none;
+  font-size: 17px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+

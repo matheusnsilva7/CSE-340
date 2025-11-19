@@ -1,0 +1,96 @@
+<h1>Add Inventory Item</h1>
+
+<%- messages() %>
+
+<% if (errors && errors.length) { %>
+<ul class="errors">
+  <% errors.forEach(function(err) { %>
+  <li><%= err.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<form id="inventoryForm" method="post" action="/inv/add-inventory">
+  <label for="classificationList">Classification</label>
+<%- classifications %>
+
+  <label for="invMake">Make</label>
+  <input
+    name="inv_make"
+    id="invMake"
+    type="text"
+    required
+    value="<%= inv_make ? inv_make : '' %>"
+  />
+
+  <label for="invModel">Model</label>
+  <input
+    name="inv_model"
+    id="invModel"
+    type="text"
+    required
+    value="<%= inv_model ? inv_model : '' %>"
+  />
+
+  <label for="invYear">Year</label>
+  <input
+    name="inv_year"
+    id="invYear"
+    type="number"
+    required
+    value="<%= inv_year ? inv_year : '' %>"
+  />
+
+  <label for="invCollor">Color</label>
+  <input
+    name="inv_color"
+    id="invColor"
+    type="text"
+    required
+    value="<%= inv_color ? inv_color : '' %>"
+  />
+
+  <label for="invPrice">Price</label>
+  <input
+    name="inv_price"
+    id="invPrice"
+    type="number"
+    step="0.01"
+    required
+    value="<%= inv_price ? inv_price : '' %>"
+  />
+
+  <label for="invMileage">Mileage</label>
+  <input
+    name="inv_miles"
+    id="invMileage"
+    type="number"
+    value="<%= inv_miles ? inv_miles : '' %>"
+  />
+
+  <label for="invDescription">Description</label>
+  <textarea
+    name="inv_description"
+    id="invDescription"
+    maxlength="2000"
+  ><%= inv_description ? inv_description : '' %></textarea>
+
+  <label for="invImage">Image Path</label>
+  <input
+    name="inv_image"
+    id="invImage"
+    type="text"
+    value="<%= inv_image ? inv_image : '/images/vehicles/' %>"
+  />
+
+  <label for="invThumb">Thumbnail Path</label>
+  <input
+    name="inv_thumbnail"
+    id="invThumb"
+    type="text"
+    value="<%= inv_thumbnail ? inv_thumbnail : '/images/vehicles/' %>"
+  />
+
+  <div id="clientError" style="color: red"></div>
+  <button type="submit">Add Vehicle</button>
+</form>

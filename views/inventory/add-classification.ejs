@@ -1,0 +1,31 @@
+<h1>Add Classification</h1>
+
+<%- messages() %> 
+
+<% if (errors && errors.length) { %>
+<ul class="errors">
+  <% errors.forEach(function(err) { %>
+  <li><%= err %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<form
+  id="classificationForm"
+  method="post"
+  action="/inv/add-classification"
+>
+  <label for="classificationName"
+    >Classification name (no spaces/special chars):</label
+  >
+  <input
+    name="classification_name"
+    id="classificationName"
+    type="text"
+    required
+    pattern="[A-Za-z0-9]+"
+    maxlength="50"
+  />
+  <div id="clientError" role="alert" style="color: red"></div>
+  <button type="submit">Add Classification</button>
+</form>
