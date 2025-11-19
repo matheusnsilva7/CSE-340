@@ -171,7 +171,9 @@ validate.classificationRules = () => {
     body("classification_name")
       .trim()
       .isLength({ min: 1 })
-      .withMessage("Please provide a classification name."),
+      .withMessage("Please provide a classification name.")
+      .matches(/^[A-Za-z0-9]+$/)
+      .withMessage("No spaces or special characters allowed."),
   ];
 };
 

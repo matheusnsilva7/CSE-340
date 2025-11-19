@@ -78,6 +78,7 @@ invCont.buildAddClassification = async function (req, res, next) {
     title: "Add New Classification",
     nav,
     errors: null,
+    classification_name: false,
   });
 };
 

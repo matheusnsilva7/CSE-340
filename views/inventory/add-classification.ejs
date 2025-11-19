@@ -5,16 +5,12 @@
 <% if (errors && errors.length) { %>
 <ul class="errors">
   <% errors.forEach(function(err) { %>
-  <li><%= err %></li>
+  <li><%= err.msg %></li>
   <% }) %>
 </ul>
 <% } %>
 
-<form
-  id="classificationForm"
-  method="post"
-  action="/inv/add-classification"
->
+<form id="classificationForm" method="post" action="/inv/add-classification">
   <label for="classificationName"
     >Classification name (no spaces/special chars):</label
   >
@@ -25,6 +21,7 @@
     required
     pattern="[A-Za-z0-9]+"
     maxlength="50"
+    value="<%= classification_name ? classification_name : '' %>"
   />
   <div id="clientError" role="alert" style="color: red"></div>
   <button type="submit">Add Classification</button>
