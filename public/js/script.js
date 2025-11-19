@@ -12,7 +12,7 @@ function validateForm(e) {
   if (!/^[A-Za-z0-9]+$/.test(name)) {
     e.preventDefault();
     const err = document.getElementById("clientError");
-    err.textContent = "No spaces or special characters allowed.";
+    err.textContent = "No empty, spaces or special characters allowed.";
   }
 }
 
