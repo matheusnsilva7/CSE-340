@@ -190,7 +190,7 @@ validate.checkUpdateData = async (req, res, next) => {
       req.body.classification_id
     );
     console.log("Miles received:", req.body.inv_miles);
-    console.log(errors);
+
     req.flash("notice", "Please correct the errors in the form.");
 
     return res.render("inventory/add-inventory", {
@@ -266,7 +266,7 @@ validate.loginRules = () => {
 
 validate.checkLoginData = async (req, res, next) => {
   const errors = validationResult(req);
-  console.log(errors);
+
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
 
@@ -362,7 +362,7 @@ validate.checkUpdatePasswordData = async (req, res, next) => {
     req.flash("notice", "Fix the password errors and try again.");
     const accountData = await accountModel.getAccountById(req.body.account_id);
     const nav = await utilities.getNav();
-    console.log(req.body.account_firstname);
+
     return res.render("account/update-account", {
       title: "Update Account",
       errors,

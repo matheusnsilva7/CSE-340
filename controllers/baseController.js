@@ -2,7 +2,6 @@ const utilities = require("../utilities/");
 const baseController = {};
 
 baseController.buildHome = async function (req, res) {
-  console.log(res.locals.accountData);
   const nav = await utilities.getNav();
   req.flash("notice", "This is a flash message.");
   res.render("index", {

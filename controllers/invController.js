@@ -298,8 +298,6 @@ invCont.buildDeleteView = async function (req, res, next) {
 
     const name = `${invData.inv_make} ${invData.inv_model}`;
 
-    console.log(res.locals.accountData);
-
     res.render("inventory/delete-confirm", {
       title: `Delete ${name}`,
       nav,
