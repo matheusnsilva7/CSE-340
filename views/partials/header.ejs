@@ -4,10 +4,10 @@
   </span>
   <div id="tools">
     <% if (user) { %>
-    <li><a href="/account">Welcome <%= user %></a></li>
-    <li><a href="/account/logout">Logout</a></li>
+    <a href="/account">Welcome <%= user %></a>
+    <a href="/account/logout">Logout</a>
     <% } else { %>
-    <li><a href="/account/login">My Account</a></li>
+    <a href="/account/login">My Account</a>
     <% } %>
   </div>
 </header>
