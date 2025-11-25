@@ -54,6 +54,10 @@ header {
 }
 #tools {
   font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
 }
 
 /******* Navigation ***************/
@@ -210,10 +214,12 @@ footer {
   margin-bottom: 2rem;
 }
 
-.notice li{
+.notice li {
   font-size: 1.4rem;
   font-weight: 600;
   color: rgb(41, 41, 41);
+  text-align: center;
+  color: red;
 }
 
 /******* Media Query (Large Screens) ***************/

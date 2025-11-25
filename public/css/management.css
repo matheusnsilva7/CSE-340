@@ -1,29 +1,93 @@
-h1 {
-  margin-bottom: 25px;
-  font-size: 28px;
-  color: #333;
-}
-
-/* Menu List */
-.management {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* Menu Links */
-.management li a {
-  display: inline-block;
-  padding: 12px 20px;
-  background: #222131;
-  color: #fff;
-  text-decoration: none;
+.inventory-management {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
   font-size: 18px;
-  border-radius: 8px;
+}
+
+.inventory-management h1,
+.inventory-management h2 {
   text-align: center;
-  min-width: 200px;
-  transition: background 0.3s ease, transform 0.2s ease;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.inventory-management h2 {
+  margin-top: 5rem;
+}
+
+.inventory-management p {
+  text-align: center;
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-size: 18px;
+}
+
+.inventory-management .management {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.inventory-management .management a {
+  background: #555;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.inventory-management .management a:hover {
+  background: #444;
+}
+
+.inventory-management select {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-size: 18px;
+}
+
+.inventory-management table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: #fafafa;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.inventory-management th,
+.inventory-management td {
+  padding: 0.8rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  color: #333;
+  font-size: 18px;
+}
+.inventory-management table a {
+  text-decoration: underline;
+}
+
+.inventory-management tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.inventory-management tr:hover {
+  background: #e9e9e9;
+}
+
+.inventory-management .alert {
+  margin: 1rem auto;
+  padding: 0.7rem;
+  border-radius: 6px;
 }

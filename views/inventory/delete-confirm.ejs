@@ -1,0 +1,43 @@
+<div class="delete-form">
+  <h1><%= title %></h1>
+  <p>Confirm Deletion - This action is permanent and cannot be undone.</p>
+
+  <% if (messages.error) { %>
+  <div class="alert alert-danger"><%= messages.error %></div>
+  <% } %> <% if (messages.success) { %>
+  <div class="alert alert-success"><%= messages.success %></div>
+  <% } %>
+
+  <form action="/inv/delete" method="post">
+    <input type="hidden" name="inv_id" value="<%= inv.inv_id %>" />
+
+    <label for="inv_make">Make</label>
+    <input id="inv_make" name="inv_make" readonly value="<%= inv.inv_make %>" />
+
+    <label for="inv_model">Model</label>
+    <input
+      id="inv_model"
+      name="inv_model"
+      readonly
+      value="<%= inv.inv_model %>"
+    />
+
+    <label for="inv_year">Year</label>
+    <input id="inv_year" name="inv_year" readonly value="<%= inv.inv_year %>" />
+
+    <label for="inv_price">Price</label>
+    <input
+      id="inv_price"
+      name="inv_price"
+      readonly
+      value="<%= inv.inv_price %>"
+    />
+
+    <p class="delete-warning">
+      Are you sure you want to permanently delete this item?
+    </p>
+
+    <input type="submit" value="Delete" />
+    <a href="/inv/">Cancel</a>
+  </form>
+</div>

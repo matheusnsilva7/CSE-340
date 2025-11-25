@@ -1,0 +1,60 @@
+.account-update-form,
+.password-update-form {
+  max-width: 500px;
+  margin: 20px 0;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.account-update-form label,
+.password-update-form label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: #222;
+}
+
+.account-update-form input,
+.password-update-form input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+h1 {
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2rem;
+  color: #222;
+  text-align: center;
+}
+
+section p {
+  font-size: 1.15rem;
+  color: #333;
+  text-align: center;
+}
+
+.account-update-form button,
+.password-update-form button {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.account-update-form button:hover,
+.password-update-form button:hover {
+  background: #000;
+}

@@ -2,6 +2,7 @@ const utilities = require(".");
 const { body, validationResult } = require("express-validator");
 const invModel = require("../models/inventory-model");
 const validate = {};
+const accountModel = require("../models/account-model");
 
 /*  **********************************
  *  Registration Data Validation Rules
@@ -31,7 +32,15 @@ validate.registationRules = () => {
       .notEmpty()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required."),
+      .withMessage("A valid email is required.")
+      .custom(async (account_email) => {
+        const emailExists = await accountModel.checkExistingEmail(
+          account_email
+        );
+        if (emailExists) {
+          throw new Error("Email exists. Please log in or use different email");
+        }
+      }),
 
     // password is required and must be strong password
     body("account_password")
@@ -61,6 +70,9 @@ validate.checkRegData = async (req, res, next) => {
       account_firstname,
       account_lastname,
       account_email,
+      user: res.locals.accountData
+        ? res.locals.accountData.account_firstname
+        : false,
     });
     return;
   }
@@ -160,6 +172,44 @@ validate.checkInventoryData = async (req, res, next) => {
       inv_price: req.body.inv_price,
       inv_miles: req.body.inv_miles,
       inv_color: req.body.inv_color,
+      user: res.locals.accountData
+        ? res.locals.accountData.account_firstname
+        : false,
+    });
+  }
+
+  next();
+};
+
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    let classifications = await utilities.buildClassificationList(
+      req.body.classification_id
+    );
+    console.log("Miles received:", req.body.inv_miles);
+    console.log(errors);
+    req.flash("notice", "Please correct the errors in the form.");
+
+    return res.render("inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+      errors: errors.array(),
+      classifications,
+      inv_make: req.body.inv_make,
+      inv_model: req.body.inv_model,
+      inv_year: req.body.inv_year,
+      inv_description: req.body.inv_description,
+      inv_image: req.body.inv_image,
+      inv_thumbnail: req.body.inv_thumbnail,
+      inv_price: req.body.inv_price,
+      inv_miles: req.body.inv_miles,
+      inv_color: req.body.inv_color,
+      user: res.locals.accountData
+        ? res.locals.accountData.account_firstname
+        : false,
     });
   }
 
@@ -190,9 +240,145 @@ validate.checkClassificationData = async (req, res, next) => {
       nav,
       errors: errors.array(),
       classification_name: req.body.classification_name,
+      user: res.locals.accountData
+        ? res.locals.accountData.account_firstname
+        : false,
     });
   }
 
   next();
 };
+
+validate.loginRules = () => {
+  return [
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("Please enter a valid email address.")
+      .normalizeEmail(),
+
+    body("account_password")
+      .trim()
+      .isLength({ min: 12 })
+      .withMessage("Password must be at least 12 characters."),
+  ];
+};
+
+validate.checkLoginData = async (req, res, next) => {
+  const errors = validationResult(req);
+  console.log(errors);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+
+    return res.status(400).render("account/login", {
+      title: "Login",
+      nav,
+      errors,
+      account_email: req.body.account_email,
+      user: res.locals.accountData
+        ? res.locals.accountData
+          ? res.locals.accountData.account_firstname
+          : false
+        : false,
+    });
+  }
+
+  next();
+};
+
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("First name is required."),
+
+    body("account_lastname")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Last name is required."),
+
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("Valid email required.")
+      .custom(async (email, { req }) => {
+        const existing = await accountModel.checkExistingEmail(email);
+
+        if (
+          existing.rows.length &&
+          existing?.rows["0"]?.account_id != req.body.account_id
+        ) {
+          throw new Error("Email already in use.");
+        }
+      }),
+  ];
+};
+
+validate.checkUpdateAccountData = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const accountData = await accountModel.getAccountById(req.body.account_id);
+
+    const nav = await utilities.getNav();
+
+    return res.render("account/update-account", {
+      title: "Update Account",
+      errors,
+      nav,
+      account_firstname: req.body.account_firstname,
+      account_lastname: req.body.account_lastname,
+      account_email: req.body.account_email,
+      accountData,
+      user: res.locals.accountData
+        ? res.locals.accountData
+          ? res.locals.accountData.account_firstname
+          : false
+        : false,
+    });
+  }
+  next();
+};
+
+validate.updatePasswordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .isLength({ min: 12 })
+      .withMessage("Password must be at least 12 characters")
+      .matches(/[A-Z]/)
+      .withMessage("Must contain one uppercase letter")
+      .matches(/\d/)
+      .withMessage("Must contain one number")
+      .matches(/[!@#$%^&*]/)
+      .withMessage("Must contain one special character"),
+  ];
+};
+
+validate.checkUpdatePasswordData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    req.flash("notice", "Fix the password errors and try again.");
+    const accountData = await accountModel.getAccountById(req.body.account_id);
+    const nav = await utilities.getNav();
+    console.log(req.body.account_firstname);
+    return res.render("account/update-account", {
+      title: "Update Account",
+      errors,
+      nav,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
+      accountData,
+      user: res.locals.accountData
+        ? res.locals.accountData
+          ? res.locals.accountData.account_firstname
+          : false
+        : false,
+    });
+  }
+  next();
+};
+
 module.exports = validate;

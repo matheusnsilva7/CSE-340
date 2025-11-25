@@ -1,8 +1,21 @@
-<h1><%= title %></h1>
+<div class="inventory-management">
+  <h1><%= title %></h1>
 
-<%- messages() %>
+  <%- messages() %>
 
-<ul class="management">
-  <li><a href="/inv/add-classification">Add Classification</a></li>
-  <li><a href="/inv/add-inventory">Add Inventory</a></li>
-</ul>
+  <ul class="management">
+    <li><a href="/inv/add-classification">Add Classification</a></li>
+    <li><a href="/inv/add-inventory">Add Inventory</a></li>
+  </ul>
+
+  <h2>Manage Inventory</h2>
+  <p>choose a classification to see those inventory items.</p>
+
+  <%- classificationSelect %>
+
+  <table id="inventoryDisplay"></table>
+
+  <noscript>JavaScript must be enabled to use this page.</noscript>
+
+  <script src="../../js/inventory.js"></script>
+</div>

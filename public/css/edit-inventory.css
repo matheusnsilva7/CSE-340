@@ -1,0 +1,75 @@
+.update-inventory {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+
+  font-size: 18px;
+  color: #333;
+}
+
+.update-inventory h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.update-inventory .errors {
+  background: #f8d7da;
+  color: #842029;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.update-inventory .errors ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.update-inventory form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.update-inventory label {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.update-inventory input,
+.update-inventory textarea,
+.update-inventory select {
+  font-size: 18px;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.update-inventory textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.update-inventory button {
+  background: #555;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.update-inventory button:hover:not([disabled]) {
+  background: #444;
+}
+
+.update-inventory button[disabled] {
+  background: #999;
+  cursor: not-allowed;
+}

@@ -1,0 +1,86 @@
+<h1><%= title %></h1>
+
+
+<% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<%- messages() %>
+
+<section>
+  <h2>Account Update</h2>
+
+  <form action="/account/update" method="POST" class="account-update-form">
+    <label for="account_firstname">First Name:</label>
+    <input
+      type="text"
+      id="account_firstname"
+      name="account_firstname"
+      required
+      value="<%= account_firstname %>"
+    />
+
+    <label for="account_lastname">Last Name:</label>
+    <input
+      type="text"
+      id="account_lastname"
+      name="account_lastname"
+      required
+      value="<%= account_lastname %>"
+    />
+
+    <label for="account_email">Email:</label>
+    <input
+      type="email"
+      id="account_email"
+      name="account_email"
+      required
+      value="<%= account_email %>"
+    />
+
+    <input
+      type="hidden"
+      name="account_id"
+      value="<%= accountData.account_id %>"
+    />
+
+    <button type="submit">Update Information</button>
+  </form>
+</section>
+
+<section>
+  <h2>Change Password</h2>
+
+  <p>
+    Enter a new password below to change your current password.
+    <br />
+    Password must be at least <strong>12 characters</strong>, include: one
+    uppercase letter, one number, and one special character.
+  </p>
+
+  <form
+    action="/account/update-password"
+    method="POST"
+    class="password-update-form"
+  >
+    <label for="account_password">New Password:</label>
+    <input
+      type="password"
+      id="account_password"
+      name="account_password"
+      required
+    />
+
+    <input
+      type="hidden"
+      name="account_id"
+      value="<%= accountData.account_id %>"
+    />
+
+    <button type="submit">Change Password</button>
+  </form>
+</section>

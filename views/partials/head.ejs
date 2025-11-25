@@ -12,33 +12,31 @@
   <link rel="stylesheet" href="/css/styles.css" />
   <% if (String(title).toLowerCase().includes('vehicle')) { %>
   <link rel="stylesheet" href="/css/inventory.css" />
-  <% } %> 
-  
-  <% if (!String(title).toLowerCase().includes('vehicle') &&
+  <% } %> <% if (!String(title).toLowerCase().includes('vehicle') &&
   !String(title).toLowerCase().includes('Home')) { %>
   <link rel="stylesheet" href="/css/detail.css" />
-  <% } %>
-
-  <% if (String(title).toLowerCase().includes('login')) { %>
+  <% } %> <% if (String(title).toLowerCase().includes('login')) { %>
   <link rel="stylesheet" href="/css/login.css" />
-  <% } %>
-
-   <% if (String(title).toLowerCase().includes('register')) { %>
+  <% } %> <% if (String(title).toLowerCase().includes('register')) { %>
   <link rel="stylesheet" href="/css/register.css" />
-  <% } %>
-
-  <% if (String(title).toLowerCase().includes('add new vehicle')) { %>
+  <% } %> <% if (String(title).toLowerCase().includes('add new vehicle')) { %>
   <link rel="stylesheet" href="/css/addInventory.css" />
-  <% } %>
-
-  <% if (String(title).toLowerCase().includes('add new classification')) { %>
+  <% } %> <% if (String(title).toLowerCase().includes('add new classification'))
+  { %>
   <link rel="stylesheet" href="/css/addClassification.css" />
-  <% } %>
-
-    <% if (String(title).toLowerCase().includes('inventory management')) { %>
+  <% } %> <% if (String(title).toLowerCase().includes('inventory management')) {
+  %>
   <link rel="stylesheet" href="/css/management.css" />
+  <% } %> <% if (String(title).toLowerCase().includes('delete')) { %>
+  <link rel="stylesheet" href="/css/delete-confirm.css" />
+
+  <% } %> <% if (String(title).toLowerCase().includes('account management')) {
+  %>
+  <link rel="stylesheet" href="/css/account.css" />
+  <% } %> <% if (String(title).toLowerCase().includes('edit')) { %>
+  <link rel="stylesheet" href="/css/edit-inventory.css" />
+  <% } %> <% if (String(title).toLowerCase().includes('update account')) { %>
+  <link rel="stylesheet" href="/css/update-account.css" />
   <% } %>
-
-
   <script defer src="/js/script.js"></script>
 </head>
