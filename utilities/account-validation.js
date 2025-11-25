@@ -155,7 +155,6 @@ validate.checkInventoryData = async (req, res, next) => {
       req.body.classification_id
     );
     console.log("Miles received:", req.body.inv_miles);
-    console.log(errors);
     req.flash("notice", "Please correct the errors in the form.");
 
     return res.render("inventory/add-inventory", {
