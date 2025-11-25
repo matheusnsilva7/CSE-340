@@ -37,7 +37,7 @@ validate.registationRules = () => {
         const emailExists = await accountModel.checkExistingEmail(
           account_email
         );
-        if (emailExists) {
+        if (emailExists.rows.length) {
           throw new Error("Email exists. Please log in or use different email");
         }
       }),
@@ -65,7 +65,7 @@ validate.checkRegData = async (req, res, next) => {
     let nav = await utilities.getNav();
     res.render("account/register", {
       errors,
-      title: "Registration",
+      title: "Register",
       nav,
       account_firstname,
       account_lastname,
