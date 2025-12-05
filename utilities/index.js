@@ -108,7 +108,7 @@ Util.buildVehicleDetailHTML = function (vehicle = {}) {
   return `
     <section class="vehicle-meta">
       <h1 class="vehicle-title">${year} ${make} ${model}</h1>
-      <p class="vehicle-price" aria-label="Price">${price}</p>
+      <p class="vehicle-price">${price}</p>
 
       <ul class="vehicle-highlights" aria-label="Vehicle highlights">
         <li><strong>Mileage:</strong> ${mileage} miles</li>

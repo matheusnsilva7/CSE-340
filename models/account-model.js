@@ -92,6 +92,23 @@ async function updatePassword(id, hashedPassword) {
   return result.rowCount;
 }
 
+async function getCommentsByAccountId(account_id) {
+  try {
+    const sql = `
+      SELECT c.comment_id, c.comment_text, c.created_at,
+             i.inv_make, i.inv_model, i.inv_year, i.inv_id
+      FROM comment c
+      JOIN inventory i ON i.inv_id = c.inv_id
+      WHERE c.account_id = $1
+      ORDER BY c.created_at DESC
+    `;
+    const result = await pool.query(sql, [account_id]);
+    return result.rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   registerAccount,
   getAccountById,
@@ -99,4 +116,5 @@ module.exports = {
   updateAccountInfo,
   checkExistingEmail,
   getAccountByEmail,
+  getCommentsByAccountId,
 };

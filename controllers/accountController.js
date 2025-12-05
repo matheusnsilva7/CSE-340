@@ -295,6 +295,28 @@ async function logout(req, res) {
   return res.redirect("/");
 }
 
+async function buildUserComments(req, res, next) {
+  try {
+    const account_id = res.locals.accountData.account_id;
+
+    const comments = await accountModel.getCommentsByAccountId(account_id);
+
+    let nav = await utilities.getNav();
+
+    res.render("account/comments", {
+      title: "My Comments",
+      nav,
+      comments,
+      accountData: res.locals.accountData,
+      user: res.locals.accountData
+        ? res.locals.accountData.account_firstname
+        : false,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   buildLogin,
   logout,
@@ -306,4 +328,5 @@ module.exports = {
   registerAccount,
   accountLogin,
   buildAccount,
+  buildUserComments,
 };

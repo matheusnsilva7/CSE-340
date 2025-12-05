@@ -1,0 +1,38 @@
+<div class="comment-page">
+  <h1><%= title %></h1>
+
+  <% if (!comments || comments.length === 0) { %>
+  <p>You have not posted any comments yet.</p>
+  <% } else { %>
+  <ul class="user-comments">
+    <% comments.forEach(comment => { %>
+    <li class="user-comment-item">
+      <p><strong>You said:</strong> <%= comment.comment_text %></p>
+      <a
+        href="/inv/comment/edit/<%= comment.comment_id %>"
+        class="edit-comment-btn"
+      >
+        Edit
+      </a>
+
+      <p class="date"><%= new Date(comment.created_at).toLocaleString() %></p>
+
+      <p class="vehicle">
+        On vehicle:
+        <a href="/inv/detail/<%= comment.inv_id %>">
+          <%= comment.inv_year %> <%= comment.inv_make %> <%= comment.inv_model
+          %>
+        </a>
+      </p>
+
+      <form
+        action="/inv/comment/delete/<%= comment.comment_id %>"
+        method="POST"
+      >
+        <button class="delete-btn">Delete</button>
+      </form>
+    </li>
+    <% }) %>
+  </ul>
+  <% } %>
+</div>

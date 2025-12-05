@@ -1,0 +1,65 @@
+.comment-page {
+  width: 90%;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.user-comments {
+  list-style: none;
+  padding: 0;
+}
+
+.user-comment-item {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background: #fafafa;
+  font-size: 1.3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.user-comment-item p {
+  grid-column: 2 span;
+}
+.vehicle,
+.user-comment-item p:first-of-type {
+  grid-column: 1 !important;
+}
+
+.date {
+  color: gray;
+  font-size: 0.9rem;
+}
+
+.delete-btn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 1.3rem;
+  margin-left: auto;
+  display: block;
+}
+
+.edit-comment-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #4a90e2;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  margin-left: auto;
+  font-size: 1.3rem;
+}
+
+.edit-comment-btn:hover {
+  background-color: #357ab8;
+}

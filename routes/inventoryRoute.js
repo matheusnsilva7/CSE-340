@@ -9,13 +9,23 @@ const invValidate = require("../utilities/account-validation");
 
 router.get(
   "/type/:classificationId",
-  utilities.checkEmployee,
   utilities.handleErrors(invController.buildByClassificationId)
 );
 router.get(
   "/detail/:inv_id",
-  utilities.checkEmployee,
   utilities.handleErrors(invController.getInventoryDetail)
+);
+
+router.post(
+  "/detail/:inv_id/comment",
+  utilities.checkLogin,
+  utilities.handleErrors(invController.postComment)
+);
+
+router.post(
+  "/comment/delete/:comment_id",
+  utilities.checkLogin,
+  utilities.handleErrors(invController.deleteComment)
 );
 
 router.get(
@@ -73,4 +83,17 @@ router.get(
 );
 
 router.post("/delete", utilities.checkEmployee, invController.deleteInventory);
+
+router.get(
+  "/comment/edit/:comment_id",
+  utilities.checkLogin,
+  utilities.handleErrors(invController.buildEditComment)
+);
+
+router.post(
+  "/comment/update",
+  utilities.checkLogin,
+  utilities.handleErrors(invController.updateComment)
+);
+
 module.exports = router;

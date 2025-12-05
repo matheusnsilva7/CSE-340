@@ -33,10 +33,15 @@
   <% } %> <% if (String(title).toLowerCase().includes('account management')) {
   %>
   <link rel="stylesheet" href="/css/account.css" />
-  <% } %> <% if (String(title).toLowerCase().includes('edit')) { %>
+  <% } %> <% if (String(title).toLowerCase().includes('edit inventory')) { %>
   <link rel="stylesheet" href="/css/edit-inventory.css" />
   <% } %> <% if (String(title).toLowerCase().includes('update account')) { %>
   <link rel="stylesheet" href="/css/update-account.css" />
+  <% } %> <% if (String(title).toLowerCase().includes('my comments')) { %>
+  <link rel="stylesheet" href="/css/comments.css" />
+  <% } %> <% if (String(title).toLowerCase().includes('edit comment')) { %>
+  <link rel="stylesheet" href="/css/edit-comment.css" />
   <% } %>
+
   <script defer src="/js/script.js"></script>
 </head>

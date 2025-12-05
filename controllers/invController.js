@@ -47,6 +47,8 @@ invCont.getInventoryDetail = async function (req, res, next) {
 
     const vehicleHTML = utilities.buildVehicleDetailHTML(vehicle);
 
+    const comments = await invModel.getCommentsByInventoryId(inv_id);
+
     const pageTitle = `${vehicle.inv_year || ""} ${vehicle.inv_make || ""} ${
       vehicle.inv_model || ""
     }`.trim();
@@ -59,6 +61,8 @@ invCont.getInventoryDetail = async function (req, res, next) {
       user: res.locals.accountData
         ? res.locals.accountData.account_firstname
         : false,
+      comments,
+      currentUser: res.locals.accountData ? res.locals.accountData : false,
     });
   } catch (err) {
     next(err);
@@ -198,7 +202,7 @@ invCont.editInventoryView = async function (req, res, next) {
   );
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
   res.render("./inventory/edit-inventory", {
-    title: "Edit " + itemName,
+    title: "Edit Inventory " + itemName,
     nav,
     classificationSelect: classificationSelect,
     errors: null,
@@ -332,4 +336,113 @@ invCont.deleteInventory = async function (req, res, next) {
     return next(error);
   }
 };
+
+invCont.postComment = async function (req, res) {
+  const inv_id = parseInt(req.params.inv_id);
+  const account_id = res.locals.accountData.account_id;
+  const { comment_text } = req.body;
+
+  if (!comment_text || comment_text.trim().length === 0) {
+    req.flash("notice", "Comment cannot be empty.");
+    return res.redirect(`/inv/detail/${inv_id}`);
+  }
+
+  if (comment_text.trim().length < 2) {
+    req.flash("notice", "Comment must be at least 2 characters.");
+    return res.redirect(`/inv/detail/${inv_id}`);
+  }
+
+  try {
+    await invModel.insertComment(inv_id, account_id, comment_text.trim());
+
+    req.flash("notice", "Comment posted successfully!");
+    res.redirect(`/inv/detail/${inv_id}`);
+  } catch (error) {
+    console.error("Error posting comment:", error);
+    req.flash("notice", "Failed to post comment.");
+    res.redirect(`/inv/detail/${inv_id}`);
+  }
+};
+
+invCont.deleteComment = async function (req, res) {
+  const comment_id = parseInt(req.params.comment_id);
+  const account_id = res.locals.accountData.account_id;
+
+  try {
+    const comment = await invModel.getCommentById(comment_id);
+
+    if (!comment) {
+      req.flash("notice", "Comment not found.");
+      return res.redirect("back");
+    }
+
+    if (comment.account_id !== account_id) {
+      req.flash("notice", "You can only delete your own comments.");
+      return res.redirect("back");
+    }
+
+    await invModel.deleteComment(comment_id);
+
+    req.flash("notice", "Comment deleted successfully.");
+    res.redirect(`/inv/detail/${comment.inv_id}`);
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+    req.flash("notice", "Failed to delete comment.");
+    res.redirect("back");
+  }
+};
+
+invCont.buildEditComment = async function (req, res) {
+  const comment_id = parseInt(req.params.comment_id);
+
+  try {
+    const comment = await invModel.getSingleComment(comment_id);
+
+    if (!comment) {
+      req.flash("notice", "Comment not found.");
+      return res.redirect("/");
+    }
+
+    if (comment.account_id !== res.locals.accountData.account_id) {
+      req.flash("notice", "You do not have permission to edit this comment.");
+      return res.redirect(`/inv/detail/${comment.inv_id}`);
+    }
+
+    let nav = await utilities.getNav();
+
+    res.render("inventory/edit-comment", {
+      title: "Edit Comment",
+      nav,
+      comment,
+      user: res.locals.accountData
+        ? res.locals.accountData.account_firstname
+        : false,
+    });
+  } catch (error) {
+    console.error(error);
+    req.flash("notice", "Could not load comment.");
+    res.redirect("/");
+  }
+};
+
+invCont.updateComment = async function (req, res) {
+  const { comment_id, comment_text, inv_id } = req.body;
+
+  if (!comment_text.trim()) {
+    req.flash("notice", "Comment cannot be empty.");
+    return res.redirect(`/inv/comment/edit/${comment_id}`);
+  }
+
+  try {
+    await invModel.updateComment(comment_id, comment_text);
+
+    req.flash("notice", "Comment updated.");
+    res.redirect(`/inv/detail/${inv_id}`);
+  } catch (error) {
+    console.error(error);
+    req.flash("notice", "Error updating comment.");
+    res.redirect(`/inv/detail/${inv_id}`);
+  }
+};
+
 module.exports = invCont;

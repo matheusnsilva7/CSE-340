@@ -1,5 +1,5 @@
 <div class="detail-container" role="main">
-  <div class="vehicle-image" aria-label="Vehicle image">
+  <div class="vehicle-image">
     <% if (vehicle.inv_image) { %>
     <img
       src="<%= vehicle.inv_image %>"
@@ -10,7 +10,63 @@
     <% } %>
   </div>
 
-  <div class="vehicle-content">
-    <%- vehicleHTML %>
+  <div class="vehicle-content"><%- vehicleHTML %></div>
+</div>
+
+<hr />
+<div class="comment-section">
+  <h2>Comments</h2>
+  <%- messages() %> <% if (user) { %>
+  <form
+    action="/inv/detail/<%= vehicle.inv_id %>/comment"
+    method="POST"
+    class="comment-form"
+  >
+    <textarea
+      name="comment_text"
+      placeholder="Write a comment..."
+      required
+      minlength="2"
+      maxlength="500"
+      rows="3"
+      style="resize: vertical"
+    ></textarea>
+
+    <button type="submit">Post Comment</button>
+  </form>
+  <% } else { %>
+  <p>You must <a href="/account/login">log in</a> to leave a comment.</p>
+  <% } %>
+
+  <div class="comment-list">
+    <% if (!comments || comments.length === 0) { %>
+    <p>No comments yet.</p>
+    <% } else { %> <% comments.forEach(comment => { %>
+    <div class="comment-item">
+      <p><strong><%= comment.account_firstname %></strong></p>
+      <% if (currentUser && currentUser.account_id === comment.account_id) { %>
+      <a
+        href="/inv/comment/edit/<%= comment.comment_id %>"
+        class="edit-comment-btn"
+      >
+        Edit
+      </a>
+      <% } %>
+      <p><%= comment.comment_text %></p>
+      <p class="comment-date">
+        <%= new Date(comment.created_at).toLocaleString() %>
+      </p>
+
+      <% if (currentUser && currentUser.account_id === comment.account_id) { %>
+      <form
+        action="/inv/comment/delete/<%= comment.comment_id %>"
+        method="POST"
+        class="delete-comment-form"
+      >
+        <button type="submit" class="delete-btn">Delete</button>
+      </form>
+      <% } %>
+    </div>
+    <% }) %> <% } %>
   </div>
 </div>

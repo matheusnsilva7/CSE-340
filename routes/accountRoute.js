@@ -59,4 +59,10 @@ router.post(
 
 router.get("/logout", accountController.logout);
 
+router.get(
+  "/comments",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildUserComments)
+);
+
 module.exports = router;
